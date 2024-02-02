@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux"
 import { addStudent, editStudent } from "../../redux/slices/Student"
 
-const studentForm = ({data =null, isClose}) => {
+const StudentForm = ({data =null, isClose}) => {
 
     const navigate = useNavigate()
 
@@ -130,4 +130,4 @@ const studentForm = ({data =null, isClose}) => {
     )
 }
 
-export default studentForm
+export default StudentForm

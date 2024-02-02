@@ -1,33 +1,34 @@
-import {Navlink} from "react-router-dom"
+import {NavLink} from "react-router-dom"
+import "./Header.css"
 
-export const Header = () => {
+const Header = () => {
     const navClass = ({isActive}) => {
-        isActive ? "nav-link active-nav" : "nav-link"
+       return isActive ? "nav-link active-nav" : "nav-link"
     }
     return(
-        <div className="header">
-            <ul>
+            <ul className="header">
                 <li>
-                <Navlink to="/" className={navClass}>
+                <NavLink to="/" className={navClass}>
                     Students
-                </Navlink>
+                </NavLink>
                 </li>
                 <li>
-                <Navlink to="/teacher-data" className={navClass}>
+                <NavLink to="/teacher" className={navClass}>
                     Teachers
-                </Navlink>
+                </NavLink>
                 </li>
                 <li>
-                <Navlink to="/class-data" className={navClass}>
+                <NavLink to="/class" className={navClass}>
                     Classes
-                </Navlink>
+                </NavLink>
                 </li>
                 <li>
-                <Navlink to="/school-data" className={navClass}>
+                <NavLink to="/school" className={navClass}>
                     Schools
-                </Navlink>
+                </NavLink>
                 </li>
             </ul>        
-        </div>
     )
 }
+
+export default Header

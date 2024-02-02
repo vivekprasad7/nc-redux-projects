@@ -4,10 +4,12 @@ import { studentSlice } from "../slices/Student"
 import { classSlice } from "../slices/Class"
 
 
-export default configureStore({
+const appStore = configureStore({
     reducer:{
         student:studentSlice.reducer,
         teacher:teacherSlice.reducer,
         class:classSlice.reducer
     }
 })
+
+export default appStore
