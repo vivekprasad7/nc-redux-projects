@@ -10,11 +10,44 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Box, Modal } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import StudentForm from '../components/studentForm/studentForm';
+import { useState } from 'react';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 
 const StudentsPage = () => {
     const dispatch = useDispatch()
     const { students, status} = useSelector((store) => store.student)
+
+    const [studentDetailsOpen, setStudentDetailsOpen] = useState(false)
+    const [editStudentOpen, setEditStudentOpen] = useState(false)
+
+    const [studentDetails, setStudentDetails] = useState({})
+
+    const isStudentDetailsOpen = () => setStudentDetailsOpen(true)
+    const isStudentDetailsClose = () => setStudentDetailsOpen(false)
+
+    const isEditStudentOpen = () => setEditStudentOpen(true)
+    const isEditStudentClose = () => setEditStudentOpen(false)
+
+    const navigate = useNavigate()
+    const [formData, setFormData] = useState([])
+
+ 
+    console.log(students, "students")
 
 
     useEffect(() => {
@@ -59,8 +92,8 @@ const StudentsPage = () => {
                                     <TableCell align='right'>{row?.marks}</TableCell>
                                     <TableCell align='right'>{row?.attendance}</TableCell>
                                     <TableCell align='right'>
-                                        <button className='table-btn' onClick={()=> { isStudentOpen(); setStudentDetails(row)}}>View</button>
-                                        <button className='table-btn' onClick={()=> { isOpen(); setStudentDetails(row)}}>Edit</button>
+                                        <button className='table-btn' onClick={()=> { isStudentDetailsOpen(); setStudentDetails(row)}}>View</button>
+                                        <button className='table-btn' onClick={()=> { isEditStudentOpen(); setStudentDetails(row)}}>Edit</button>
                                         <button className='table-btn' onClick={() => dispatch(deleteStudent(row?._id))}>Delete</button>
                                     </TableCell>
 
@@ -76,6 +109,33 @@ const StudentsPage = () => {
 
             </TableContainer>
         }
+        <Modal
+        open={editStudentOpen}
+        onClose={isEditStudentClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        >
+            <Box sx={style}>
+                    <StudentForm data={formData} isClose={isEditStudentClose}/>
+            </Box>
+
+        </Modal>
+        <Modal
+        open={studentDetailsOpen}
+        onClose={isStudentDetailsClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        >
+            <Box sx={style}>
+                <h1>{studentDetails?.name}</h1>
+                <p>Age: {studentDetails?.age}</p>
+                <p>Marks: {studentDetails?.marks}</p>
+                <p>Attendance: {studentDetails?.attendance}</p>
+                <p>Gender: {studentDetails?.gender}</p>
+                <p>Grade: {studentDetails?.grade}</p>
+            </Box>
+
+        </Modal>
 
     </div>
   )

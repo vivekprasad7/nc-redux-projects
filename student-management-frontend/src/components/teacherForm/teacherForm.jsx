@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { addTeacher, editTeacher } from "../../redux/slices/Teacher"
 
 
-export const teacherForm = ({data =null, isClose}) => {
+export const TeacherForm = ({data =null, isClose}) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
