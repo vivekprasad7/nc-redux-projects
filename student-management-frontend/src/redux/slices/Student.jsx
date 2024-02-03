@@ -35,7 +35,7 @@ export const studentSlice = createSlice({
     },
     reducers:{
         getStudents:(state, action) => {
-            state.student = action.payload;
+            state.students = action.payload;
         }
     },
     extraReducers:{
