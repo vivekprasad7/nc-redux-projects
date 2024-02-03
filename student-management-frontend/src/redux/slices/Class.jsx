@@ -7,7 +7,7 @@ export const classSlice = createSlice({
     error: null,
     standard: "all",
     gender: "",
-    sortBy: "",
+    sortBy: "none",
   },
   reducers: {
     classSetter: (state, action) => {
@@ -16,7 +16,7 @@ export const classSlice = createSlice({
     genderSetter: (state, action) => {
       state.gender = action.payload;
     },
-    sortBySetter: (state, action) => {
+    sortSetter: (state, action) => {
       state.sortBy = action.payload;
     },
     classReset: (state) => {
