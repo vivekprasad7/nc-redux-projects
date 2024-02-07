@@ -47,7 +47,6 @@ const StudentsPage = () => {
     const [formData, setFormData] = useState([])
 
  
-    console.log(students, "students")
 
 
     useEffect(() => {
@@ -56,7 +55,6 @@ const StudentsPage = () => {
         }
     },[dispatch, status])
 
-    console.log(students)
 
 
   return (

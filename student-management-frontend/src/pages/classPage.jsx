@@ -35,7 +35,6 @@ const ClassPage = () => {
     }, [classFilter, gender])
 
     const sortFilter = useMemo(() => {
-        console.log("sort")
         if (sortBy === "none") {
             return genderFilter;
         } else if (sortBy === "name") {
