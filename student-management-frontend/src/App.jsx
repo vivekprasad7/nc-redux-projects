@@ -1,4 +1,3 @@
-import './App.css'
 import Header from './components/header/Header'
 import {Routes, Route} from 'react-router-dom'
 import StudentsPage from './pages/studentsPage'

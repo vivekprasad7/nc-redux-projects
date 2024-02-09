@@ -1,0 +1,18 @@
+.table-btn{
+    border:none;
+    display: inline;
+  }
+  
+  .table-class {
+    border: 1px solid #c2c2c3;
+  }
+  
+  .table-class td {
+    border: 1px solid #c2c2c3;
+    padding: 0.5rem 1rem;
+  }
+  
+  .table-head-sort {
+    display: flex;
+    gap: 10px;
+  }

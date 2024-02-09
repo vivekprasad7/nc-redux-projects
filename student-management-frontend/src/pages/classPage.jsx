@@ -4,6 +4,8 @@ import { getStudents } from '../redux/slices/Student'
 import { classReset, classSetter, genderSetter, sortSetter } from '../redux/slices/Class'
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha'
 
+import "../App.css"
+
 const style = {
     cursor: "pointer",
     "&:hover": {
