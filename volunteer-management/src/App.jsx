@@ -9,7 +9,6 @@ function App() {
   return (
 
     <div>
-      <h1>Heading</h1>
       <Header />
 
       <Routes>

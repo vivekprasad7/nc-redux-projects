@@ -2,16 +2,16 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch} from 'react-redux'
 import {useNavigate} from "react-router-dom"
-import { addVolunteer, updateVolunteer } from '../../redux/slices/Volunteer'
+import { addEvent, updateEvent } from '../../redux/slices/Event'
 
-const VolunteerForm = ({data = null, isClosed}) => {
+const EventForm = ({data = null, isClosed}) => {
 
     const initialFormInput = {
         name: "",
-        age: "",
-        skills: "",
-        availability: "",
-        eventHistory: ""
+        data: "",
+        location: "",
+        description: "",
+        requirements: ""
     }
     const [formInput, setFormInput] = useState(data ? data : initialFormInput)
 
@@ -26,13 +26,13 @@ const VolunteerForm = ({data = null, isClosed}) => {
     const submitHandler = () => {
         if(
             formInput.name &&
-            formInput.age &&
-            formInput.skills &&
-            formInput.availability &&
-            formInput.eventHistory
+            formInput.date &&
+            formInput.location &&
+            formInput.description &&
+            formInput.requirements
             ) {
 
-            dispatch(addVolunteer(formInput))
+            dispatch(addEvent(formInput))
             setFormInput(initialFormInput)
             navigate("/")
             }
@@ -41,13 +41,13 @@ const VolunteerForm = ({data = null, isClosed}) => {
     const updateHandler = () => {
         if(
             formInput.name &&
-            formInput.age &&
-            formInput.skills &&
-            formInput.availability &&
-            formInput.eventHistory
+            formInput.date &&
+            formInput.location &&
+            formInput.description &&
+            formInput.requirements
             ) {
 
-            dispatch(updateVolunteer(formInput))
+            dispatch(updateEvent(formInput))
             setFormInput(initialFormInput)
             navigate("/")
             }
@@ -63,39 +63,39 @@ const VolunteerForm = ({data = null, isClosed}) => {
             onChange={changeHandler}
             />
              <input
-            name="age"
-            type="text"
-            placeholder='Enter Age'
-            value={formInput.age}
+            name="date"
+            type="date"
+            placeholder='Enter Date'
+            value={formInput.date}
             onChange={changeHandler}
             />
              <input
-            name="skills"
+            name="location"
             type="text"
-            placeholder='Enter Skills'
-            value={formInput.skills}
+            placeholder='Enter Location'
+            value={formInput.location}
             onChange={changeHandler}
             />
              <input
-            name="availability"
+            name="description"
             type="text"
-            placeholder='Enter Availability'
-            value={formInput.availability}
+            placeholder='Enter Description'
+            value={formInput.description}
             onChange={changeHandler}
             />
              <input
-            name="eventHistory"
+            name="requirements"
             type="text"
-            placeholder='Enter Event History'
-            value={formInput.eventHistory}
+            placeholder='Enter Requirements'
+            value={formInput.requirements}
             onChange={changeHandler}
             />
             {
-                data ? <button onClick={() => {updateHandler()}}>Edit Volunteer</button> :<button onClick={() => {submitHandler()}}>Add Volunteer</button> 
+                data ? <button onClick={() => {updateHandler()}}>Edit Event</button> :<button onClick={() => {submitHandler()}}>Add Event</button> 
             }
 
         </div>
     )
 }
 
-export default VolunteerForm
+export default EventForm
