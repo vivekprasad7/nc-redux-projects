@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import VolunteerForm from '../components/volunteerForm/volunteerForm'
 import { useEffect } from 'react'
-import { deleteVolunteer, getVolunteers } from '../redux/slices/Volunteer'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import { deleteEvent, getEvents } from '../redux/slices/Event';
+import EventForm from '../components/eventsForm/eventsForm';
 
 export const style = {
     position: "absolute",
@@ -22,8 +22,8 @@ export const style = {
     p: 4
   };
 
-const Volunteers = () => {
-    const { status, volunteers } = useSelector((store) => store.volunteer)
+const Events = () => {
+    const { status, events } = useSelector((store) => store.event)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -39,14 +39,14 @@ const Volunteers = () => {
 
     useEffect(() => {
         if (status === "idle") {
-            dispatch(getVolunteers())
+            dispatch(getEvents())
         }
     }, [status, dispatch])
     return (
         <div>
-            <h1>Volunteers</h1>
+            <h1>Events</h1>
             <div>
-                <button onClick={() => navigate("add-volunteer")}>Add Volunteer</button>
+                <button onClick={() => navigate("/add-event")}>Add Event</button>
             </div>
             <div>
                 <table>
@@ -54,26 +54,26 @@ const Volunteers = () => {
                         <tr>
 
                         <th>Name</th>
-                        <th>Age</th>
-                        <th>Skills</th>
-                        <th>Availability</th>
-                        <th>Event History</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Requirements</th>
                         <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            volunteers?.map((item) => {
+                            events?.map((item) => {
                                 return (
                                     <tr key={item._id}>
                                         <td>{item.name}</td>
-                                        <td>{item.age}</td>
-                                        <td>{item.skills}</td>
-                                        <td>{item.availability}</td>
-                                        <td>{item.eventHistory}</td>
+                                        <td>{item.date}</td>
+                                        <td>{item.location}</td>
+                                        <td>{item.description}</td>
+                                        <td>{item.requirements}</td>
                                         <td>
                                             <button onClick={() => handleOpenEditModal(item)}>Edit</button>
-                                            <button onClick={() => dispatch(deleteVolunteer(item._id))}>Delete</button>
+                                            <button onClick={() => dispatch(deleteEvent(item._id))}>Delete</button>
                                         </td>
                                     </tr>
                                 )
@@ -91,11 +91,11 @@ const Volunteers = () => {
                 aria-describedby="parent-modal-description"
             >
                 <Box sx={{ ...style}}>
-                    <VolunteerForm data={editData} isClosed={handleCloseEditModal}/>
+                    <EventForm data={editData} isClosed={handleCloseEditModal}/>
                 </Box>
             </Modal>
         </div>
     )
 }
 
-export default Volunteers
+export default Events

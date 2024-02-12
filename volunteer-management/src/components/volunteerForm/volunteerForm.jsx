@@ -76,13 +76,18 @@ const VolunteerForm = ({data = null, isClosed}) => {
             value={formInput.skills}
             onChange={changeHandler}
             />
-             <input
-            name="availability"
+            <select  name="availability"
             type="text"
             placeholder='Enter Availability'
             value={formInput.availability}
-            onChange={changeHandler}
-            />
+            onChange={changeHandler}>
+                    <option >Select Availability</option>
+                    <option value="Available">Available</option>
+                    <option value="Not Available">Not Available</option>
+
+
+            </select>
+             
              <input
             name="eventHistory"
             type="text"

@@ -7,7 +7,9 @@ export const getEvents = createAsyncThunk("events/fetchEvents", async () => {
 })
 
 export const addEvent = createAsyncThunk("events/add", async (data) => {
+    console.log("add-event", data )
     const res = await axios.post(`https://9671719c-7c5c-47a5-a4f6-ac7503357d0a-00-1h1emies30arz.worf.replit.dev/event`, data)
+    console.log("add-event", res.data )
     return res.data.addedEvent;
 })
 
@@ -17,7 +19,7 @@ export const updateEvent = createAsyncThunk("events/update", async (data) => {
 })
 
 export const deleteEvent = createAsyncThunk("events/add", async (id) => {
-    const res = await axios.delete(`https://9671719c-7c5c-47a5-a4f6-ac7503357d0a-00-1h1emies30arz.worf.replit.dev/event/${id}`, data)
+    const res = await axios.delete(`https://9671719c-7c5c-47a5-a4f6-ac7503357d0a-00-1h1emies30arz.worf.replit.dev/event/${id}`)
     return res.data.deletedEvent;
 })
 
@@ -63,6 +65,7 @@ export const eventSlice = createSlice({
         },
         [deleteEvent.fulfilled]: (state, action) => {
             state.events = state.events.filter((item) => item._id !== action.payload._id)
+            return state;
         },
         [deleteEvent.rejected]: (state, action) => {
             state.error = action.error.message

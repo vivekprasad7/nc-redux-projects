@@ -7,11 +7,11 @@ import { addEvent, updateEvent } from '../../redux/slices/Event'
 const EventForm = ({data = null, isClosed}) => {
 
     const initialFormInput = {
-        name: "",
-        data: "",
-        location: "",
-        description: "",
-        requirements: ""
+        name: data ? data.name : "",
+        date: data ? data.date : "",
+        location: data ? data.location :"",
+        description: data ? data.description :"",
+        requirements: data ? data.requirements :""
     }
     const [formInput, setFormInput] = useState(data ? data : initialFormInput)
 
@@ -31,10 +31,10 @@ const EventForm = ({data = null, isClosed}) => {
             formInput.description &&
             formInput.requirements
             ) {
-
+                console.log("insideSubmitHandler", formInput)
             dispatch(addEvent(formInput))
             setFormInput(initialFormInput)
-            navigate("/")
+            navigate("/events")
             }
     }
 
@@ -49,7 +49,7 @@ const EventForm = ({data = null, isClosed}) => {
 
             dispatch(updateEvent(formInput))
             setFormInput(initialFormInput)
-            navigate("/")
+            navigate("/events")
             }
     }
 

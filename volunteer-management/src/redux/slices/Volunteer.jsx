@@ -7,17 +7,27 @@ export const getVolunteers = createAsyncThunk("volunteers/fetchVolunteers", asyn
 })
 
 export const addVolunteer = createAsyncThunk("volunteers/add", async (data) => {
+    console.log("addVolunteer", data)
     const res = await axios.post(`https://9671719c-7c5c-47a5-a4f6-ac7503357d0a-00-1h1emies30arz.worf.replit.dev/volunteer`, data)
+    console.log("addVolunteer", res.data)
+
     return res.data.addedVolunteer;
 })
 
 export const updateVolunteer = createAsyncThunk("volunteers/update", async (data) => {
+    console.log("updateVolunteer", data)
+
     const res = await axios.post(`https://9671719c-7c5c-47a5-a4f6-ac7503357d0a-00-1h1emies30arz.worf.replit.dev/volunteer/${data._id}`, data)
+    console.log("updateVolunteer", res.data)
+
     return res.data.updatedVolunteer;
 })
 
 export const deleteVolunteer = createAsyncThunk("volunteers/add", async (id) => {
-    const res = await axios.delete(`https://9671719c-7c5c-47a5-a4f6-ac7503357d0a-00-1h1emies30arz.worf.replit.dev/volunteer/${id}`, data)
+    console.log("deleteVolunteer", id)
+    const res = await axios.delete(`https://9671719c-7c5c-47a5-a4f6-ac7503357d0a-00-1h1emies30arz.worf.replit.dev/volunteer/${id}`)
+    console.log("deleteVolunteer", res.data)
+
     return res.data.deletedVolunteer;
 })
 
@@ -62,7 +72,8 @@ export const volunteerSlice = createSlice({
             state.status = "loading"
         },
         [deleteVolunteer.fulfilled]: (state, action) => {
-            state.volunteers = state.volunteers.filter((item) => item._id !== action.payload._id)
+         state.volunteers = state.volunteers.filter((item) => item._id !== action.payload._id)
+         return state;
         },
         [deleteVolunteer.rejected]: (state, action) => {
             state.error = action.error.message
